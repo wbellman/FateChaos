@@ -1,0 +1,43 @@
+@startuml "Card - Classes" 
+
+    class Card {
+    }
+
+    package Cards {
+
+        class Scene {
+        }
+
+        class Character {
+        }
+
+        class Npc {
+        }
+
+        class Aspect {
+        }
+
+        class HighConcept {
+        }
+
+        class Trouble {
+        }
+
+        class Attribute {
+        }
+
+        class Location {
+        }
+
+        Scene --> Card
+        Npc --> Card
+        Aspect --> Card
+        Location --> Card
+
+        HighConcept --> Aspect
+        Trouble --> Aspect
+        Attribute --> Aspect
+        
+
+    }
+@enduml

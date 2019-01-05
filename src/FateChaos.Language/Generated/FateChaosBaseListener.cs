@@ -35,17 +35,17 @@ using ParserRuleContext = Antlr4.Runtime.ParserRuleContext;
 [System.CLSCompliant(false)]
 public partial class FateChaosBaseListener : IFateChaosListener {
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="FateChaosParser.test"/>.
+	/// Enter a parse tree produced by <see cref="FateChaosParser.game"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterTest([NotNull] FateChaosParser.TestContext context) { }
+	public virtual void EnterGame([NotNull] FateChaosParser.GameContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="FateChaosParser.test"/>.
+	/// Exit a parse tree produced by <see cref="FateChaosParser.game"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitTest([NotNull] FateChaosParser.TestContext context) { }
+	public virtual void ExitGame([NotNull] FateChaosParser.GameContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by the <c>playerCharacterDef</c>
 	/// labeled alternative in <see cref="FateChaosParser.item"/>.

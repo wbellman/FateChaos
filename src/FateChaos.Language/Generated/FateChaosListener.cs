@@ -31,15 +31,15 @@ using IToken = Antlr4.Runtime.IToken;
 [System.CLSCompliant(false)]
 public interface IFateChaosListener : IParseTreeListener {
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="FateChaosParser.test"/>.
+	/// Enter a parse tree produced by <see cref="FateChaosParser.game"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterTest([NotNull] FateChaosParser.TestContext context);
+	void EnterGame([NotNull] FateChaosParser.GameContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="FateChaosParser.test"/>.
+	/// Exit a parse tree produced by <see cref="FateChaosParser.game"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitTest([NotNull] FateChaosParser.TestContext context);
+	void ExitGame([NotNull] FateChaosParser.GameContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>playerCharacterDef</c>
 	/// labeled alternative in <see cref="FateChaosParser.item"/>.

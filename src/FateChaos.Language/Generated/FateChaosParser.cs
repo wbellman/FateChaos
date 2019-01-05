@@ -42,13 +42,13 @@ public partial class FateChaosParser : Parser {
 		ADJECTIVE=21, VERB=22, PLACE=23, PERSON=24, SCENE=25, LOCATION=26, GENERATE=27, 
 		ROLL=28, WS=29, COMMENT=30, ANY=31;
 	public const int
-		RULE_test = 0, RULE_item = 1, RULE_scene = 2, RULE_character = 3, RULE_npc = 4, 
+		RULE_game = 0, RULE_item = 1, RULE_scene = 2, RULE_character = 3, RULE_npc = 4, 
 		RULE_generate = 5, RULE_roll = 6, RULE_aspect = 7, RULE_high_concept = 8, 
 		RULE_trouble = 9, RULE_attribute = 10, RULE_location = 11, RULE_set = 12, 
 		RULE_description = 13, RULE_name = 14, RULE_place = 15, RULE_element = 16, 
 		RULE_random = 17, RULE_phrase = 18, RULE_end = 19;
 	public static readonly string[] ruleNames = {
-		"test", "item", "scene", "character", "npc", "generate", "roll", "aspect", 
+		"game", "item", "scene", "character", "npc", "generate", "roll", "aspect", 
 		"high_concept", "trouble", "attribute", "location", "set", "description", 
 		"name", "place", "element", "random", "phrase", "end"
 	};
@@ -95,7 +95,7 @@ public partial class FateChaosParser : Parser {
 		Interpreter = new ParserATNSimulator(this, _ATN, decisionToDFA, sharedContextCache);
 	}
 
-	public partial class TestContext : ParserRuleContext {
+	public partial class GameContext : ParserRuleContext {
 		public ITerminalNode Eof() { return GetToken(FateChaosParser.Eof, 0); }
 		public ItemContext[] item() {
 			return GetRuleContexts<ItemContext>();
@@ -103,30 +103,30 @@ public partial class FateChaosParser : Parser {
 		public ItemContext item(int i) {
 			return GetRuleContext<ItemContext>(i);
 		}
-		public TestContext(ParserRuleContext parent, int invokingState)
+		public GameContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_test; } }
+		public override int RuleIndex { get { return RULE_game; } }
 		public override void EnterRule(IParseTreeListener listener) {
 			IFateChaosListener typedListener = listener as IFateChaosListener;
-			if (typedListener != null) typedListener.EnterTest(this);
+			if (typedListener != null) typedListener.EnterGame(this);
 		}
 		public override void ExitRule(IParseTreeListener listener) {
 			IFateChaosListener typedListener = listener as IFateChaosListener;
-			if (typedListener != null) typedListener.ExitTest(this);
+			if (typedListener != null) typedListener.ExitGame(this);
 		}
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IFateChaosVisitor<TResult> typedVisitor = visitor as IFateChaosVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitTest(this);
+			if (typedVisitor != null) return typedVisitor.VisitGame(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
 
 	[RuleVersion(0)]
-	public TestContext test() {
-		TestContext _localctx = new TestContext(Context, State);
-		EnterRule(_localctx, 0, RULE_test);
+	public GameContext game() {
+		GameContext _localctx = new GameContext(Context, State);
+		EnterRule(_localctx, 0, RULE_game);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
@@ -514,7 +514,9 @@ public partial class FateChaosParser : Parser {
 
 	public partial class NpcContext : ParserRuleContext {
 		public ITerminalNode NPC() { return GetToken(FateChaosParser.NPC, 0); }
-		public ITerminalNode TEXT() { return GetToken(FateChaosParser.TEXT, 0); }
+		public NameContext name() {
+			return GetRuleContext<NameContext>(0);
+		}
 		public High_conceptContext high_concept() {
 			return GetRuleContext<High_conceptContext>(0);
 		}
@@ -559,7 +561,7 @@ public partial class FateChaosParser : Parser {
 			EnterOuterAlt(_localctx, 1);
 			{
 			State = 80; Match(NPC);
-			State = 81; Match(TEXT);
+			State = 81; name();
 			State = 82; high_concept();
 			State = 84;
 			ErrorHandler.Sync(this);
@@ -1541,18 +1543,18 @@ public partial class FateChaosParser : Parser {
 		'\x2', 'M', 'N', '\x3', '\x2', '\x2', '\x2', 'N', 'P', '\x3', '\x2', '\x2', 
 		'\x2', 'O', 'M', '\x3', '\x2', '\x2', '\x2', 'P', 'Q', '\x5', '(', '\x15', 
 		'\x2', 'Q', '\t', '\x3', '\x2', '\x2', '\x2', 'R', 'S', '\a', '\n', '\x2', 
-		'\x2', 'S', 'T', '\a', '\a', '\x2', '\x2', 'T', 'V', '\x5', '\x12', '\n', 
-		'\x2', 'U', 'W', '\x5', '\x14', '\v', '\x2', 'V', 'U', '\x3', '\x2', '\x2', 
-		'\x2', 'V', 'W', '\x3', '\x2', '\x2', '\x2', 'W', '[', '\x3', '\x2', '\x2', 
-		'\x2', 'X', 'Z', '\x5', '\x16', '\f', '\x2', 'Y', 'X', '\x3', '\x2', '\x2', 
-		'\x2', 'Z', ']', '\x3', '\x2', '\x2', '\x2', '[', 'Y', '\x3', '\x2', '\x2', 
-		'\x2', '[', '\\', '\x3', '\x2', '\x2', '\x2', '\\', '^', '\x3', '\x2', 
-		'\x2', '\x2', ']', '[', '\x3', '\x2', '\x2', '\x2', '^', '_', '\x5', '(', 
-		'\x15', '\x2', '_', '\v', '\x3', '\x2', '\x2', '\x2', '`', '\x62', '\a', 
-		'\x1D', '\x2', '\x2', '\x61', '\x63', '\t', '\x2', '\x2', '\x2', '\x62', 
-		'\x61', '\x3', '\x2', '\x2', '\x2', '\x63', '\x64', '\x3', '\x2', '\x2', 
-		'\x2', '\x64', '\x62', '\x3', '\x2', '\x2', '\x2', '\x64', '\x65', '\x3', 
-		'\x2', '\x2', '\x2', '\x65', 'i', '\x3', '\x2', '\x2', '\x2', '\x66', 
+		'\x2', 'S', 'T', '\x5', '\x1E', '\x10', '\x2', 'T', 'V', '\x5', '\x12', 
+		'\n', '\x2', 'U', 'W', '\x5', '\x14', '\v', '\x2', 'V', 'U', '\x3', '\x2', 
+		'\x2', '\x2', 'V', 'W', '\x3', '\x2', '\x2', '\x2', 'W', '[', '\x3', '\x2', 
+		'\x2', '\x2', 'X', 'Z', '\x5', '\x16', '\f', '\x2', 'Y', 'X', '\x3', '\x2', 
+		'\x2', '\x2', 'Z', ']', '\x3', '\x2', '\x2', '\x2', '[', 'Y', '\x3', '\x2', 
+		'\x2', '\x2', '[', '\\', '\x3', '\x2', '\x2', '\x2', '\\', '^', '\x3', 
+		'\x2', '\x2', '\x2', ']', '[', '\x3', '\x2', '\x2', '\x2', '^', '_', '\x5', 
+		'(', '\x15', '\x2', '_', '\v', '\x3', '\x2', '\x2', '\x2', '`', '\x62', 
+		'\a', '\x1D', '\x2', '\x2', '\x61', '\x63', '\t', '\x2', '\x2', '\x2', 
+		'\x62', '\x61', '\x3', '\x2', '\x2', '\x2', '\x63', '\x64', '\x3', '\x2', 
+		'\x2', '\x2', '\x64', '\x62', '\x3', '\x2', '\x2', '\x2', '\x64', '\x65', 
+		'\x3', '\x2', '\x2', '\x2', '\x65', 'i', '\x3', '\x2', '\x2', '\x2', '\x66', 
 		'h', '\x5', '(', '\x15', '\x2', 'g', '\x66', '\x3', '\x2', '\x2', '\x2', 
 		'h', 'k', '\x3', '\x2', '\x2', '\x2', 'i', 'g', '\x3', '\x2', '\x2', '\x2', 
 		'i', 'j', '\x3', '\x2', '\x2', '\x2', 'j', '\r', '\x3', '\x2', '\x2', 

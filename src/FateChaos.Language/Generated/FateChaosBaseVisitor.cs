@@ -34,7 +34,7 @@ using ParserRuleContext = Antlr4.Runtime.ParserRuleContext;
 [System.CLSCompliant(false)]
 public partial class FateChaosBaseVisitor<Result> : AbstractParseTreeVisitor<Result>, IFateChaosVisitor<Result> {
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="FateChaosParser.test"/>.
+	/// Visit a parse tree produced by <see cref="FateChaosParser.game"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -42,7 +42,7 @@ public partial class FateChaosBaseVisitor<Result> : AbstractParseTreeVisitor<Res
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitTest([NotNull] FateChaosParser.TestContext context) { return VisitChildren(context); }
+	public virtual Result VisitGame([NotNull] FateChaosParser.GameContext context) { return VisitChildren(context); }
 	/// <summary>
 	/// Visit a parse tree produced by the <c>playerCharacterDef</c>
 	/// labeled alternative in <see cref="FateChaosParser.item"/>.

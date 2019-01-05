@@ -32,11 +32,11 @@ using IToken = Antlr4.Runtime.IToken;
 [System.CLSCompliant(false)]
 public interface IFateChaosVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="FateChaosParser.test"/>.
+	/// Visit a parse tree produced by <see cref="FateChaosParser.game"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitTest([NotNull] FateChaosParser.TestContext context);
+	Result VisitGame([NotNull] FateChaosParser.GameContext context);
 	/// <summary>
 	/// Visit a parse tree produced by the <c>playerCharacterDef</c>
 	/// labeled alternative in <see cref="FateChaosParser.item"/>.

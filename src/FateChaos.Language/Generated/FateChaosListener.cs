@@ -213,26 +213,6 @@ public interface IFateChaosListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitLocation([NotNull] FateChaosParser.LocationContext context);
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="FateChaosParser.set"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterSet([NotNull] FateChaosParser.SetContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="FateChaosParser.set"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitSet([NotNull] FateChaosParser.SetContext context);
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="FateChaosParser.description"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterDescription([NotNull] FateChaosParser.DescriptionContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="FateChaosParser.description"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitDescription([NotNull] FateChaosParser.DescriptionContext context);
-	/// <summary>
 	/// Enter a parse tree produced by <see cref="FateChaosParser.name"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -242,16 +222,6 @@ public interface IFateChaosListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitName([NotNull] FateChaosParser.NameContext context);
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="FateChaosParser.place"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterPlace([NotNull] FateChaosParser.PlaceContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="FateChaosParser.place"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitPlace([NotNull] FateChaosParser.PlaceContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="FateChaosParser.element"/>.
 	/// </summary>
@@ -263,29 +233,45 @@ public interface IFateChaosListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitElement([NotNull] FateChaosParser.ElementContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>randomFree</c>
-	/// labeled alternative in <see cref="FateChaosParser.random"/>.
+	/// Enter a parse tree produced by <see cref="FateChaosParser.random"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterRandomFree([NotNull] FateChaosParser.RandomFreeContext context);
+	void EnterRandom([NotNull] FateChaosParser.RandomContext context);
 	/// <summary>
-	/// Exit a parse tree produced by the <c>randomFree</c>
-	/// labeled alternative in <see cref="FateChaosParser.random"/>.
+	/// Exit a parse tree produced by <see cref="FateChaosParser.random"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitRandomFree([NotNull] FateChaosParser.RandomFreeContext context);
+	void ExitRandom([NotNull] FateChaosParser.RandomContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>randomPhrase</c>
-	/// labeled alternative in <see cref="FateChaosParser.random"/>.
+	/// Enter a parse tree produced by <see cref="FateChaosParser.skills"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterRandomPhrase([NotNull] FateChaosParser.RandomPhraseContext context);
+	void EnterSkills([NotNull] FateChaosParser.SkillsContext context);
 	/// <summary>
-	/// Exit a parse tree produced by the <c>randomPhrase</c>
-	/// labeled alternative in <see cref="FateChaosParser.random"/>.
+	/// Exit a parse tree produced by <see cref="FateChaosParser.skills"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitRandomPhrase([NotNull] FateChaosParser.RandomPhraseContext context);
+	void ExitSkills([NotNull] FateChaosParser.SkillsContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="FateChaosParser.skill"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterSkill([NotNull] FateChaosParser.SkillContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="FateChaosParser.skill"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitSkill([NotNull] FateChaosParser.SkillContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="FateChaosParser.number"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterNumber([NotNull] FateChaosParser.NumberContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="FateChaosParser.number"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitNumber([NotNull] FateChaosParser.NumberContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="FateChaosParser.phrase"/>.
 	/// </summary>
@@ -296,6 +282,16 @@ public interface IFateChaosListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitPhrase([NotNull] FateChaosParser.PhraseContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="FateChaosParser.pos"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterPos([NotNull] FateChaosParser.PosContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="FateChaosParser.pos"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitPos([NotNull] FateChaosParser.PosContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="FateChaosParser.end"/>.
 	/// </summary>

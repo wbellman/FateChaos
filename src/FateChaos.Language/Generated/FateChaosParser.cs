@@ -38,19 +38,19 @@ public partial class FateChaosParser : Parser {
 	public const int
 		SEP=1, INT=2, NUMBER=3, DICE=4, TEXT=5, CHARACTER=6, END=7, NPC=8, CARD=9, 
 		ASPECT=10, HIGHCONCEPT=11, TROUBLE=12, RANDOM=13, RANDOMANY=14, RANDOMSET=15, 
-		RANDOMNAME=16, RANDOMPLACE=17, RANDOMDESCRIPTION=18, ATTRIBUTE=19, NOUN=20, 
-		ADJECTIVE=21, VERB=22, PLACE=23, PERSON=24, SCENE=25, LOCATION=26, GENERATE=27, 
-		ROLL=28, WS=29, COMMENT=30, ANY=31;
+		RANDOMNAME=16, RANDOMPLACE=17, RANDOMDESCRIPTION=18, RANDOMSKILL=19, ATTRIBUTE=20, 
+		NOUN=21, ADJECTIVE=22, VERB=23, PLACE=24, PERSON=25, SCENE=26, LOCATION=27, 
+		GENERATE=28, ROLL=29, SKILLS=30, WS=31, COMMENT=32, ANY=33;
 	public const int
 		RULE_game = 0, RULE_item = 1, RULE_scene = 2, RULE_character = 3, RULE_npc = 4, 
 		RULE_generate = 5, RULE_roll = 6, RULE_aspect = 7, RULE_high_concept = 8, 
-		RULE_trouble = 9, RULE_attribute = 10, RULE_location = 11, RULE_set = 12, 
-		RULE_description = 13, RULE_name = 14, RULE_place = 15, RULE_element = 16, 
-		RULE_random = 17, RULE_phrase = 18, RULE_end = 19;
+		RULE_trouble = 9, RULE_attribute = 10, RULE_location = 11, RULE_name = 12, 
+		RULE_element = 13, RULE_random = 14, RULE_skills = 15, RULE_skill = 16, 
+		RULE_number = 17, RULE_phrase = 18, RULE_pos = 19, RULE_end = 20;
 	public static readonly string[] ruleNames = {
 		"game", "item", "scene", "character", "npc", "generate", "roll", "aspect", 
-		"high_concept", "trouble", "attribute", "location", "set", "description", 
-		"name", "place", "element", "random", "phrase", "end"
+		"high_concept", "trouble", "attribute", "location", "name", "element", 
+		"random", "skills", "skill", "number", "phrase", "pos", "end"
 	};
 
 	private static readonly string[] _LiteralNames = {
@@ -59,9 +59,9 @@ public partial class FateChaosParser : Parser {
 	private static readonly string[] _SymbolicNames = {
 		null, "SEP", "INT", "NUMBER", "DICE", "TEXT", "CHARACTER", "END", "NPC", 
 		"CARD", "ASPECT", "HIGHCONCEPT", "TROUBLE", "RANDOM", "RANDOMANY", "RANDOMSET", 
-		"RANDOMNAME", "RANDOMPLACE", "RANDOMDESCRIPTION", "ATTRIBUTE", "NOUN", 
-		"ADJECTIVE", "VERB", "PLACE", "PERSON", "SCENE", "LOCATION", "GENERATE", 
-		"ROLL", "WS", "COMMENT", "ANY"
+		"RANDOMNAME", "RANDOMPLACE", "RANDOMDESCRIPTION", "RANDOMSKILL", "ATTRIBUTE", 
+		"NOUN", "ADJECTIVE", "VERB", "PLACE", "PERSON", "SCENE", "LOCATION", "GENERATE", 
+		"ROLL", "SKILLS", "WS", "COMMENT", "ANY"
 	};
 	public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
 
@@ -131,20 +131,20 @@ public partial class FateChaosParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 41;
+			State = 43;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
 			do {
 				{
 				{
-				State = 40; item();
+				State = 42; item();
 				}
 				}
-				State = 43;
+				State = 45;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.LA(1);
 			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CHARACTER) | (1L << NPC) | (1L << ASPECT) | (1L << SCENE) | (1L << GENERATE) | (1L << ROLL))) != 0) );
-			State = 45; Match(Eof);
+			State = 47; Match(Eof);
 			}
 		}
 		catch (RecognitionException re) {
@@ -290,49 +290,49 @@ public partial class FateChaosParser : Parser {
 		ItemContext _localctx = new ItemContext(Context, State);
 		EnterRule(_localctx, 2, RULE_item);
 		try {
-			State = 53;
+			State = 55;
 			ErrorHandler.Sync(this);
 			switch (TokenStream.LA(1)) {
 			case CHARACTER:
 				_localctx = new PlayerCharacterDefContext(_localctx);
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 47; character();
+				State = 49; character();
 				}
 				break;
 			case NPC:
 				_localctx = new NonPlayerCharacterDefContext(_localctx);
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 48; npc();
+				State = 50; npc();
 				}
 				break;
 			case SCENE:
 				_localctx = new SceneDefContext(_localctx);
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 49; scene();
+				State = 51; scene();
 				}
 				break;
 			case ASPECT:
 				_localctx = new AspectDefContext(_localctx);
 				EnterOuterAlt(_localctx, 4);
 				{
-				State = 50; aspect();
+				State = 52; aspect();
 				}
 				break;
 			case GENERATE:
 				_localctx = new GenerateRequestContext(_localctx);
 				EnterOuterAlt(_localctx, 5);
 				{
-				State = 51; generate();
+				State = 53; generate();
 				}
 				break;
 			case ROLL:
 				_localctx = new RollDiceContext(_localctx);
 				EnterOuterAlt(_localctx, 6);
 				{
-				State = 52; roll();
+				State = 54; roll();
 				}
 				break;
 			default:
@@ -352,8 +352,8 @@ public partial class FateChaosParser : Parser {
 
 	public partial class SceneContext : ParserRuleContext {
 		public ITerminalNode SCENE() { return GetToken(FateChaosParser.SCENE, 0); }
-		public SetContext set() {
-			return GetRuleContext<SetContext>(0);
+		public ElementContext element() {
+			return GetRuleContext<ElementContext>(0);
 		}
 		public LocationContext location() {
 			return GetRuleContext<LocationContext>(0);
@@ -395,23 +395,23 @@ public partial class FateChaosParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 55; Match(SCENE);
-			State = 56; set();
-			State = 57; location();
-			State = 61;
+			State = 57; Match(SCENE);
+			State = 58; element();
+			State = 59; location();
+			State = 63;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
 			while (_la==ASPECT) {
 				{
 				{
-				State = 58; aspect();
+				State = 60; aspect();
 				}
 				}
-				State = 63;
+				State = 65;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.LA(1);
 			}
-			State = 64; end();
+			State = 66; end();
 			}
 		}
 		catch (RecognitionException re) {
@@ -445,6 +445,9 @@ public partial class FateChaosParser : Parser {
 		public AttributeContext attribute(int i) {
 			return GetRuleContext<AttributeContext>(i);
 		}
+		public SkillsContext skills() {
+			return GetRuleContext<SkillsContext>(0);
+		}
 		public CharacterContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
@@ -473,32 +476,41 @@ public partial class FateChaosParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 66; Match(CHARACTER);
-			State = 67; name();
-			State = 68; high_concept();
-			State = 70;
+			State = 68; Match(CHARACTER);
+			State = 69; name();
+			State = 70; high_concept();
+			State = 72;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
 			if (_la==TROUBLE) {
 				{
-				State = 69; trouble();
+				State = 71; trouble();
 				}
 			}
 
-			State = 75;
+			State = 77;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
 			while (_la==ATTRIBUTE) {
 				{
 				{
-				State = 72; attribute();
+				State = 74; attribute();
 				}
 				}
-				State = 77;
+				State = 79;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.LA(1);
 			}
-			State = 78; end();
+			State = 81;
+			ErrorHandler.Sync(this);
+			_la = TokenStream.LA(1);
+			if (_la==SKILLS) {
+				{
+				State = 80; skills();
+				}
+			}
+
+			State = 83; end();
 			}
 		}
 		catch (RecognitionException re) {
@@ -532,6 +544,9 @@ public partial class FateChaosParser : Parser {
 		public AttributeContext attribute(int i) {
 			return GetRuleContext<AttributeContext>(i);
 		}
+		public SkillsContext skills() {
+			return GetRuleContext<SkillsContext>(0);
+		}
 		public NpcContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
@@ -560,32 +575,41 @@ public partial class FateChaosParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 80; Match(NPC);
-			State = 81; name();
-			State = 82; high_concept();
-			State = 84;
+			State = 85; Match(NPC);
+			State = 86; name();
+			State = 87; high_concept();
+			State = 89;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
 			if (_la==TROUBLE) {
 				{
-				State = 83; trouble();
+				State = 88; trouble();
 				}
 			}
 
-			State = 89;
+			State = 94;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
 			while (_la==ATTRIBUTE) {
 				{
 				{
-				State = 86; attribute();
+				State = 91; attribute();
 				}
 				}
-				State = 91;
+				State = 96;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.LA(1);
 			}
-			State = 92; end();
+			State = 98;
+			ErrorHandler.Sync(this);
+			_la = TokenStream.LA(1);
+			if (_la==SKILLS) {
+				{
+				State = 97; skills();
+				}
+			}
+
+			State = 100; end();
 			}
 		}
 		catch (RecognitionException re) {
@@ -652,8 +676,8 @@ public partial class FateChaosParser : Parser {
 			int _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 94; Match(GENERATE);
-			State = 96;
+			State = 102; Match(GENERATE);
+			State = 104;
 			ErrorHandler.Sync(this);
 			_alt = 1;
 			do {
@@ -661,7 +685,7 @@ public partial class FateChaosParser : Parser {
 				case 1:
 					{
 					{
-					State = 95;
+					State = 103;
 					_la = TokenStream.LA(1);
 					if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CHARACTER) | (1L << NPC) | (1L << ASPECT) | (1L << SCENE))) != 0)) ) {
 					ErrorHandler.RecoverInline(this);
@@ -676,20 +700,20 @@ public partial class FateChaosParser : Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				State = 98;
+				State = 106;
 				ErrorHandler.Sync(this);
-				_alt = Interpreter.AdaptivePredict(TokenStream,7,Context);
+				_alt = Interpreter.AdaptivePredict(TokenStream,9,Context);
 			} while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.INVALID_ALT_NUMBER );
-			State = 103;
+			State = 111;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
 			while (_la==END) {
 				{
 				{
-				State = 100; end();
+				State = 108; end();
 				}
 				}
-				State = 105;
+				State = 113;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.LA(1);
 			}
@@ -736,8 +760,8 @@ public partial class FateChaosParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 106; Match(ROLL);
-			State = 107; Match(DICE);
+			State = 114; Match(ROLL);
+			State = 115; Match(DICE);
 			}
 		}
 		catch (RecognitionException re) {
@@ -783,8 +807,8 @@ public partial class FateChaosParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 109; Match(ASPECT);
-			State = 110; element();
+			State = 117; Match(ASPECT);
+			State = 118; element();
 			}
 		}
 		catch (RecognitionException re) {
@@ -830,8 +854,8 @@ public partial class FateChaosParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 112; Match(HIGHCONCEPT);
-			State = 113; element();
+			State = 120; Match(HIGHCONCEPT);
+			State = 121; element();
 			}
 		}
 		catch (RecognitionException re) {
@@ -877,8 +901,8 @@ public partial class FateChaosParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 115; Match(TROUBLE);
-			State = 116; element();
+			State = 123; Match(TROUBLE);
+			State = 124; element();
 			}
 		}
 		catch (RecognitionException re) {
@@ -924,8 +948,8 @@ public partial class FateChaosParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 118; Match(ATTRIBUTE);
-			State = 119; element();
+			State = 126; Match(ATTRIBUTE);
+			State = 127; element();
 			}
 		}
 		catch (RecognitionException re) {
@@ -941,8 +965,8 @@ public partial class FateChaosParser : Parser {
 
 	public partial class LocationContext : ParserRuleContext {
 		public ITerminalNode LOCATION() { return GetToken(FateChaosParser.LOCATION, 0); }
-		public PlaceContext place() {
-			return GetRuleContext<PlaceContext>(0);
+		public ElementContext element() {
+			return GetRuleContext<ElementContext>(0);
 		}
 		public LocationContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
@@ -971,114 +995,8 @@ public partial class FateChaosParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 121; Match(LOCATION);
-			State = 122; place();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			ErrorHandler.ReportError(this, re);
-			ErrorHandler.Recover(this, re);
-		}
-		finally {
-			ExitRule();
-		}
-		return _localctx;
-	}
-
-	public partial class SetContext : ParserRuleContext {
-		public ITerminalNode TEXT() { return GetToken(FateChaosParser.TEXT, 0); }
-		public ITerminalNode RANDOMSET() { return GetToken(FateChaosParser.RANDOMSET, 0); }
-		public SetContext(ParserRuleContext parent, int invokingState)
-			: base(parent, invokingState)
-		{
-		}
-		public override int RuleIndex { get { return RULE_set; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			IFateChaosListener typedListener = listener as IFateChaosListener;
-			if (typedListener != null) typedListener.EnterSet(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			IFateChaosListener typedListener = listener as IFateChaosListener;
-			if (typedListener != null) typedListener.ExitSet(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IFateChaosVisitor<TResult> typedVisitor = visitor as IFateChaosVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitSet(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
-
-	[RuleVersion(0)]
-	public SetContext set() {
-		SetContext _localctx = new SetContext(Context, State);
-		EnterRule(_localctx, 24, RULE_set);
-		int _la;
-		try {
-			EnterOuterAlt(_localctx, 1);
-			{
-			State = 124;
-			_la = TokenStream.LA(1);
-			if ( !(_la==TEXT || _la==RANDOMSET) ) {
-			ErrorHandler.RecoverInline(this);
-			}
-			else {
-				ErrorHandler.ReportMatch(this);
-			    Consume();
-			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			ErrorHandler.ReportError(this, re);
-			ErrorHandler.Recover(this, re);
-		}
-		finally {
-			ExitRule();
-		}
-		return _localctx;
-	}
-
-	public partial class DescriptionContext : ParserRuleContext {
-		public ITerminalNode TEXT() { return GetToken(FateChaosParser.TEXT, 0); }
-		public ITerminalNode RANDOMDESCRIPTION() { return GetToken(FateChaosParser.RANDOMDESCRIPTION, 0); }
-		public DescriptionContext(ParserRuleContext parent, int invokingState)
-			: base(parent, invokingState)
-		{
-		}
-		public override int RuleIndex { get { return RULE_description; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			IFateChaosListener typedListener = listener as IFateChaosListener;
-			if (typedListener != null) typedListener.EnterDescription(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			IFateChaosListener typedListener = listener as IFateChaosListener;
-			if (typedListener != null) typedListener.ExitDescription(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IFateChaosVisitor<TResult> typedVisitor = visitor as IFateChaosVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitDescription(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
-
-	[RuleVersion(0)]
-	public DescriptionContext description() {
-		DescriptionContext _localctx = new DescriptionContext(Context, State);
-		EnterRule(_localctx, 26, RULE_description);
-		int _la;
-		try {
-			EnterOuterAlt(_localctx, 1);
-			{
-			State = 126;
-			_la = TokenStream.LA(1);
-			if ( !(_la==TEXT || _la==RANDOMDESCRIPTION) ) {
-			ErrorHandler.RecoverInline(this);
-			}
-			else {
-				ErrorHandler.ReportMatch(this);
-			    Consume();
-			}
+			State = 129; Match(LOCATION);
+			State = 130; element();
 			}
 		}
 		catch (RecognitionException re) {
@@ -1118,12 +1036,12 @@ public partial class FateChaosParser : Parser {
 	[RuleVersion(0)]
 	public NameContext name() {
 		NameContext _localctx = new NameContext(Context, State);
-		EnterRule(_localctx, 28, RULE_name);
+		EnterRule(_localctx, 24, RULE_name);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 128;
+			State = 132;
 			_la = TokenStream.LA(1);
 			if ( !(_la==TEXT || _la==RANDOMNAME) ) {
 			ErrorHandler.RecoverInline(this);
@@ -1145,61 +1063,12 @@ public partial class FateChaosParser : Parser {
 		return _localctx;
 	}
 
-	public partial class PlaceContext : ParserRuleContext {
-		public ITerminalNode TEXT() { return GetToken(FateChaosParser.TEXT, 0); }
-		public ITerminalNode RANDOMPLACE() { return GetToken(FateChaosParser.RANDOMPLACE, 0); }
-		public PlaceContext(ParserRuleContext parent, int invokingState)
-			: base(parent, invokingState)
-		{
-		}
-		public override int RuleIndex { get { return RULE_place; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			IFateChaosListener typedListener = listener as IFateChaosListener;
-			if (typedListener != null) typedListener.EnterPlace(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			IFateChaosListener typedListener = listener as IFateChaosListener;
-			if (typedListener != null) typedListener.ExitPlace(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IFateChaosVisitor<TResult> typedVisitor = visitor as IFateChaosVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitPlace(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
-
-	[RuleVersion(0)]
-	public PlaceContext place() {
-		PlaceContext _localctx = new PlaceContext(Context, State);
-		EnterRule(_localctx, 30, RULE_place);
-		int _la;
-		try {
-			EnterOuterAlt(_localctx, 1);
-			{
-			State = 130;
-			_la = TokenStream.LA(1);
-			if ( !(_la==TEXT || _la==RANDOMPLACE) ) {
-			ErrorHandler.RecoverInline(this);
-			}
-			else {
-				ErrorHandler.ReportMatch(this);
-			    Consume();
-			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			ErrorHandler.ReportError(this, re);
-			ErrorHandler.Recover(this, re);
-		}
-		finally {
-			ExitRule();
-		}
-		return _localctx;
-	}
-
 	public partial class ElementContext : ParserRuleContext {
 		public ITerminalNode TEXT() { return GetToken(FateChaosParser.TEXT, 0); }
+		public ITerminalNode RANDOMSET() { return GetToken(FateChaosParser.RANDOMSET, 0); }
+		public ITerminalNode RANDOMNAME() { return GetToken(FateChaosParser.RANDOMNAME, 0); }
+		public ITerminalNode RANDOMDESCRIPTION() { return GetToken(FateChaosParser.RANDOMDESCRIPTION, 0); }
+		public ITerminalNode RANDOMPLACE() { return GetToken(FateChaosParser.RANDOMPLACE, 0); }
 		public RandomContext random() {
 			return GetRuleContext<RandomContext>(0);
 		}
@@ -1226,22 +1095,42 @@ public partial class FateChaosParser : Parser {
 	[RuleVersion(0)]
 	public ElementContext element() {
 		ElementContext _localctx = new ElementContext(Context, State);
-		EnterRule(_localctx, 32, RULE_element);
+		EnterRule(_localctx, 26, RULE_element);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 134;
+			State = 140;
 			ErrorHandler.Sync(this);
 			switch (TokenStream.LA(1)) {
 			case TEXT:
 				{
-				State = 132; Match(TEXT);
+				State = 134; Match(TEXT);
+				}
+				break;
+			case RANDOMSET:
+				{
+				State = 135; Match(RANDOMSET);
+				}
+				break;
+			case RANDOMNAME:
+				{
+				State = 136; Match(RANDOMNAME);
+				}
+				break;
+			case RANDOMDESCRIPTION:
+				{
+				State = 137; Match(RANDOMDESCRIPTION);
+				}
+				break;
+			case RANDOMPLACE:
+				{
+				State = 138; Match(RANDOMPLACE);
 				}
 				break;
 			case RANDOM:
 			case RANDOMANY:
 				{
-				State = 133; random();
+				State = 139; random();
 				}
 				break;
 			default:
@@ -1261,51 +1150,30 @@ public partial class FateChaosParser : Parser {
 	}
 
 	public partial class RandomContext : ParserRuleContext {
+		public ITerminalNode RANDOMANY() { return GetToken(FateChaosParser.RANDOMANY, 0); }
+		public ITerminalNode RANDOM() { return GetToken(FateChaosParser.RANDOM, 0); }
+		public PhraseContext phrase() {
+			return GetRuleContext<PhraseContext>(0);
+		}
+		public NumberContext number() {
+			return GetRuleContext<NumberContext>(0);
+		}
 		public RandomContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
 		public override int RuleIndex { get { return RULE_random; } }
-	 
-		public RandomContext() { }
-		public virtual void CopyFrom(RandomContext context) {
-			base.CopyFrom(context);
-		}
-	}
-	public partial class RandomFreeContext : RandomContext {
-		public ITerminalNode RANDOMANY() { return GetToken(FateChaosParser.RANDOMANY, 0); }
-		public RandomFreeContext(RandomContext context) { CopyFrom(context); }
 		public override void EnterRule(IParseTreeListener listener) {
 			IFateChaosListener typedListener = listener as IFateChaosListener;
-			if (typedListener != null) typedListener.EnterRandomFree(this);
+			if (typedListener != null) typedListener.EnterRandom(this);
 		}
 		public override void ExitRule(IParseTreeListener listener) {
 			IFateChaosListener typedListener = listener as IFateChaosListener;
-			if (typedListener != null) typedListener.ExitRandomFree(this);
+			if (typedListener != null) typedListener.ExitRandom(this);
 		}
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IFateChaosVisitor<TResult> typedVisitor = visitor as IFateChaosVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitRandomFree(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
-	public partial class RandomPhraseContext : RandomContext {
-		public ITerminalNode RANDOM() { return GetToken(FateChaosParser.RANDOM, 0); }
-		public PhraseContext phrase() {
-			return GetRuleContext<PhraseContext>(0);
-		}
-		public RandomPhraseContext(RandomContext context) { CopyFrom(context); }
-		public override void EnterRule(IParseTreeListener listener) {
-			IFateChaosListener typedListener = listener as IFateChaosListener;
-			if (typedListener != null) typedListener.EnterRandomPhrase(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			IFateChaosListener typedListener = listener as IFateChaosListener;
-			if (typedListener != null) typedListener.ExitRandomPhrase(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IFateChaosVisitor<TResult> typedVisitor = visitor as IFateChaosVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitRandomPhrase(this);
+			if (typedVisitor != null) return typedVisitor.VisitRandom(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
@@ -1313,28 +1181,200 @@ public partial class FateChaosParser : Parser {
 	[RuleVersion(0)]
 	public RandomContext random() {
 		RandomContext _localctx = new RandomContext(Context, State);
-		EnterRule(_localctx, 34, RULE_random);
+		EnterRule(_localctx, 28, RULE_random);
 		try {
-			State = 139;
+			State = 147;
 			ErrorHandler.Sync(this);
-			switch (TokenStream.LA(1)) {
-			case RANDOMANY:
-				_localctx = new RandomFreeContext(_localctx);
+			switch ( Interpreter.AdaptivePredict(TokenStream,12,Context) ) {
+			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 136; Match(RANDOMANY);
+				State = 142; Match(RANDOMANY);
 				}
 				break;
-			case RANDOM:
-				_localctx = new RandomPhraseContext(_localctx);
+			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 137; Match(RANDOM);
-				State = 138; phrase();
+				State = 143; Match(RANDOM);
+				State = 144; phrase();
+				}
+				break;
+			case 3:
+				EnterOuterAlt(_localctx, 3);
+				{
+				State = 145; Match(RANDOM);
+				State = 146; number();
+				}
+				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			ErrorHandler.ReportError(this, re);
+			ErrorHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class SkillsContext : ParserRuleContext {
+		public ITerminalNode SKILLS() { return GetToken(FateChaosParser.SKILLS, 0); }
+		public SkillContext[] skill() {
+			return GetRuleContexts<SkillContext>();
+		}
+		public SkillContext skill(int i) {
+			return GetRuleContext<SkillContext>(i);
+		}
+		public SkillsContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_skills; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IFateChaosListener typedListener = listener as IFateChaosListener;
+			if (typedListener != null) typedListener.EnterSkills(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IFateChaosListener typedListener = listener as IFateChaosListener;
+			if (typedListener != null) typedListener.ExitSkills(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IFateChaosVisitor<TResult> typedVisitor = visitor as IFateChaosVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSkills(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public SkillsContext skills() {
+		SkillsContext _localctx = new SkillsContext(Context, State);
+		EnterRule(_localctx, 30, RULE_skills);
+		int _la;
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 149; Match(SKILLS);
+			State = 151;
+			ErrorHandler.Sync(this);
+			_la = TokenStream.LA(1);
+			do {
+				{
+				{
+				State = 150; skill();
+				}
+				}
+				State = 153;
+				ErrorHandler.Sync(this);
+				_la = TokenStream.LA(1);
+			} while ( _la==INT || _la==RANDOMSKILL );
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			ErrorHandler.ReportError(this, re);
+			ErrorHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class SkillContext : ParserRuleContext {
+		public NumberContext number() {
+			return GetRuleContext<NumberContext>(0);
+		}
+		public ITerminalNode TEXT() { return GetToken(FateChaosParser.TEXT, 0); }
+		public ITerminalNode RANDOMSKILL() { return GetToken(FateChaosParser.RANDOMSKILL, 0); }
+		public SkillContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_skill; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IFateChaosListener typedListener = listener as IFateChaosListener;
+			if (typedListener != null) typedListener.EnterSkill(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IFateChaosListener typedListener = listener as IFateChaosListener;
+			if (typedListener != null) typedListener.ExitSkill(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IFateChaosVisitor<TResult> typedVisitor = visitor as IFateChaosVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSkill(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public SkillContext skill() {
+		SkillContext _localctx = new SkillContext(Context, State);
+		EnterRule(_localctx, 32, RULE_skill);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 159;
+			ErrorHandler.Sync(this);
+			switch (TokenStream.LA(1)) {
+			case INT:
+				{
+				State = 155; number();
+				State = 156; Match(TEXT);
+				}
+				break;
+			case RANDOMSKILL:
+				{
+				State = 158; Match(RANDOMSKILL);
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			ErrorHandler.ReportError(this, re);
+			ErrorHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class NumberContext : ParserRuleContext {
+		public ITerminalNode INT() { return GetToken(FateChaosParser.INT, 0); }
+		public NumberContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_number; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IFateChaosListener typedListener = listener as IFateChaosListener;
+			if (typedListener != null) typedListener.EnterNumber(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IFateChaosListener typedListener = listener as IFateChaosListener;
+			if (typedListener != null) typedListener.ExitNumber(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IFateChaosVisitor<TResult> typedVisitor = visitor as IFateChaosVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNumber(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public NumberContext number() {
+		NumberContext _localctx = new NumberContext(Context, State);
+		EnterRule(_localctx, 34, RULE_number);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 161; Match(INT);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1349,17 +1389,11 @@ public partial class FateChaosParser : Parser {
 	}
 
 	public partial class PhraseContext : ParserRuleContext {
-		public ITerminalNode[] NOUN() { return GetTokens(FateChaosParser.NOUN); }
-		public ITerminalNode NOUN(int i) {
-			return GetToken(FateChaosParser.NOUN, i);
+		public PosContext[] pos() {
+			return GetRuleContexts<PosContext>();
 		}
-		public ITerminalNode[] ADJECTIVE() { return GetTokens(FateChaosParser.ADJECTIVE); }
-		public ITerminalNode ADJECTIVE(int i) {
-			return GetToken(FateChaosParser.ADJECTIVE, i);
-		}
-		public ITerminalNode[] VERB() { return GetTokens(FateChaosParser.VERB); }
-		public ITerminalNode VERB(int i) {
-			return GetToken(FateChaosParser.VERB, i);
+		public PosContext pos(int i) {
+			return GetRuleContext<PosContext>(i);
 		}
 		public PhraseContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
@@ -1389,27 +1423,74 @@ public partial class FateChaosParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 142;
+			State = 164;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
 			do {
 				{
 				{
-				State = 141;
-				_la = TokenStream.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << NOUN) | (1L << ADJECTIVE) | (1L << VERB))) != 0)) ) {
-				ErrorHandler.RecoverInline(this);
-				}
-				else {
-					ErrorHandler.ReportMatch(this);
-				    Consume();
+				State = 163; pos();
 				}
 				}
-				}
-				State = 144;
+				State = 166;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << NOUN) | (1L << ADJECTIVE) | (1L << VERB))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << TEXT) | (1L << NOUN) | (1L << ADJECTIVE) | (1L << VERB))) != 0) );
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			ErrorHandler.ReportError(this, re);
+			ErrorHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class PosContext : ParserRuleContext {
+		public ITerminalNode TEXT() { return GetToken(FateChaosParser.TEXT, 0); }
+		public ITerminalNode NOUN() { return GetToken(FateChaosParser.NOUN, 0); }
+		public ITerminalNode ADJECTIVE() { return GetToken(FateChaosParser.ADJECTIVE, 0); }
+		public ITerminalNode VERB() { return GetToken(FateChaosParser.VERB, 0); }
+		public PosContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_pos; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IFateChaosListener typedListener = listener as IFateChaosListener;
+			if (typedListener != null) typedListener.EnterPos(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IFateChaosListener typedListener = listener as IFateChaosListener;
+			if (typedListener != null) typedListener.ExitPos(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IFateChaosVisitor<TResult> typedVisitor = visitor as IFateChaosVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPos(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public PosContext pos() {
+		PosContext _localctx = new PosContext(Context, State);
+		EnterRule(_localctx, 38, RULE_pos);
+		int _la;
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 168;
+			_la = TokenStream.LA(1);
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << TEXT) | (1L << NOUN) | (1L << ADJECTIVE) | (1L << VERB))) != 0)) ) {
+			ErrorHandler.RecoverInline(this);
+			}
+			else {
+				ErrorHandler.ReportMatch(this);
+			    Consume();
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -1448,11 +1529,11 @@ public partial class FateChaosParser : Parser {
 	[RuleVersion(0)]
 	public EndContext end() {
 		EndContext _localctx = new EndContext(Context, State);
-		EnterRule(_localctx, 38, RULE_end);
+		EnterRule(_localctx, 40, RULE_end);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 146; Match(END);
+			State = 170; Match(END);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1468,124 +1549,147 @@ public partial class FateChaosParser : Parser {
 
 	private static char[] _serializedATN = {
 		'\x3', '\x608B', '\xA72A', '\x8133', '\xB9ED', '\x417C', '\x3BE7', '\x7786', 
-		'\x5964', '\x3', '!', '\x97', '\x4', '\x2', '\t', '\x2', '\x4', '\x3', 
+		'\x5964', '\x3', '#', '\xAF', '\x4', '\x2', '\t', '\x2', '\x4', '\x3', 
 		'\t', '\x3', '\x4', '\x4', '\t', '\x4', '\x4', '\x5', '\t', '\x5', '\x4', 
 		'\x6', '\t', '\x6', '\x4', '\a', '\t', '\a', '\x4', '\b', '\t', '\b', 
 		'\x4', '\t', '\t', '\t', '\x4', '\n', '\t', '\n', '\x4', '\v', '\t', '\v', 
 		'\x4', '\f', '\t', '\f', '\x4', '\r', '\t', '\r', '\x4', '\xE', '\t', 
 		'\xE', '\x4', '\xF', '\t', '\xF', '\x4', '\x10', '\t', '\x10', '\x4', 
 		'\x11', '\t', '\x11', '\x4', '\x12', '\t', '\x12', '\x4', '\x13', '\t', 
-		'\x13', '\x4', '\x14', '\t', '\x14', '\x4', '\x15', '\t', '\x15', '\x3', 
-		'\x2', '\x6', '\x2', ',', '\n', '\x2', '\r', '\x2', '\xE', '\x2', '-', 
-		'\x3', '\x2', '\x3', '\x2', '\x3', '\x3', '\x3', '\x3', '\x3', '\x3', 
-		'\x3', '\x3', '\x3', '\x3', '\x3', '\x3', '\x5', '\x3', '\x38', '\n', 
-		'\x3', '\x3', '\x4', '\x3', '\x4', '\x3', '\x4', '\x3', '\x4', '\a', '\x4', 
-		'>', '\n', '\x4', '\f', '\x4', '\xE', '\x4', '\x41', '\v', '\x4', '\x3', 
-		'\x4', '\x3', '\x4', '\x3', '\x5', '\x3', '\x5', '\x3', '\x5', '\x3', 
-		'\x5', '\x5', '\x5', 'I', '\n', '\x5', '\x3', '\x5', '\a', '\x5', 'L', 
-		'\n', '\x5', '\f', '\x5', '\xE', '\x5', 'O', '\v', '\x5', '\x3', '\x5', 
-		'\x3', '\x5', '\x3', '\x6', '\x3', '\x6', '\x3', '\x6', '\x3', '\x6', 
-		'\x5', '\x6', 'W', '\n', '\x6', '\x3', '\x6', '\a', '\x6', 'Z', '\n', 
-		'\x6', '\f', '\x6', '\xE', '\x6', ']', '\v', '\x6', '\x3', '\x6', '\x3', 
-		'\x6', '\x3', '\a', '\x3', '\a', '\x6', '\a', '\x63', '\n', '\a', '\r', 
-		'\a', '\xE', '\a', '\x64', '\x3', '\a', '\a', '\a', 'h', '\n', '\a', '\f', 
-		'\a', '\xE', '\a', 'k', '\v', '\a', '\x3', '\b', '\x3', '\b', '\x3', '\b', 
-		'\x3', '\t', '\x3', '\t', '\x3', '\t', '\x3', '\n', '\x3', '\n', '\x3', 
-		'\n', '\x3', '\v', '\x3', '\v', '\x3', '\v', '\x3', '\f', '\x3', '\f', 
-		'\x3', '\f', '\x3', '\r', '\x3', '\r', '\x3', '\r', '\x3', '\xE', '\x3', 
-		'\xE', '\x3', '\xF', '\x3', '\xF', '\x3', '\x10', '\x3', '\x10', '\x3', 
-		'\x11', '\x3', '\x11', '\x3', '\x12', '\x3', '\x12', '\x5', '\x12', '\x89', 
-		'\n', '\x12', '\x3', '\x13', '\x3', '\x13', '\x3', '\x13', '\x5', '\x13', 
-		'\x8E', '\n', '\x13', '\x3', '\x14', '\x6', '\x14', '\x91', '\n', '\x14', 
-		'\r', '\x14', '\xE', '\x14', '\x92', '\x3', '\x15', '\x3', '\x15', '\x3', 
-		'\x15', '\x2', '\x2', '\x16', '\x2', '\x4', '\x6', '\b', '\n', '\f', '\xE', 
+		'\x13', '\x4', '\x14', '\t', '\x14', '\x4', '\x15', '\t', '\x15', '\x4', 
+		'\x16', '\t', '\x16', '\x3', '\x2', '\x6', '\x2', '.', '\n', '\x2', '\r', 
+		'\x2', '\xE', '\x2', '/', '\x3', '\x2', '\x3', '\x2', '\x3', '\x3', '\x3', 
+		'\x3', '\x3', '\x3', '\x3', '\x3', '\x3', '\x3', '\x3', '\x3', '\x5', 
+		'\x3', ':', '\n', '\x3', '\x3', '\x4', '\x3', '\x4', '\x3', '\x4', '\x3', 
+		'\x4', '\a', '\x4', '@', '\n', '\x4', '\f', '\x4', '\xE', '\x4', '\x43', 
+		'\v', '\x4', '\x3', '\x4', '\x3', '\x4', '\x3', '\x5', '\x3', '\x5', '\x3', 
+		'\x5', '\x3', '\x5', '\x5', '\x5', 'K', '\n', '\x5', '\x3', '\x5', '\a', 
+		'\x5', 'N', '\n', '\x5', '\f', '\x5', '\xE', '\x5', 'Q', '\v', '\x5', 
+		'\x3', '\x5', '\x5', '\x5', 'T', '\n', '\x5', '\x3', '\x5', '\x3', '\x5', 
+		'\x3', '\x6', '\x3', '\x6', '\x3', '\x6', '\x3', '\x6', '\x5', '\x6', 
+		'\\', '\n', '\x6', '\x3', '\x6', '\a', '\x6', '_', '\n', '\x6', '\f', 
+		'\x6', '\xE', '\x6', '\x62', '\v', '\x6', '\x3', '\x6', '\x5', '\x6', 
+		'\x65', '\n', '\x6', '\x3', '\x6', '\x3', '\x6', '\x3', '\a', '\x3', '\a', 
+		'\x6', '\a', 'k', '\n', '\a', '\r', '\a', '\xE', '\a', 'l', '\x3', '\a', 
+		'\a', '\a', 'p', '\n', '\a', '\f', '\a', '\xE', '\a', 's', '\v', '\a', 
+		'\x3', '\b', '\x3', '\b', '\x3', '\b', '\x3', '\t', '\x3', '\t', '\x3', 
+		'\t', '\x3', '\n', '\x3', '\n', '\x3', '\n', '\x3', '\v', '\x3', '\v', 
+		'\x3', '\v', '\x3', '\f', '\x3', '\f', '\x3', '\f', '\x3', '\r', '\x3', 
+		'\r', '\x3', '\r', '\x3', '\xE', '\x3', '\xE', '\x3', '\xF', '\x3', '\xF', 
+		'\x3', '\xF', '\x3', '\xF', '\x3', '\xF', '\x3', '\xF', '\x5', '\xF', 
+		'\x8F', '\n', '\xF', '\x3', '\x10', '\x3', '\x10', '\x3', '\x10', '\x3', 
+		'\x10', '\x3', '\x10', '\x5', '\x10', '\x96', '\n', '\x10', '\x3', '\x11', 
+		'\x3', '\x11', '\x6', '\x11', '\x9A', '\n', '\x11', '\r', '\x11', '\xE', 
+		'\x11', '\x9B', '\x3', '\x12', '\x3', '\x12', '\x3', '\x12', '\x3', '\x12', 
+		'\x5', '\x12', '\xA2', '\n', '\x12', '\x3', '\x13', '\x3', '\x13', '\x3', 
+		'\x14', '\x6', '\x14', '\xA7', '\n', '\x14', '\r', '\x14', '\xE', '\x14', 
+		'\xA8', '\x3', '\x15', '\x3', '\x15', '\x3', '\x16', '\x3', '\x16', '\x3', 
+		'\x16', '\x2', '\x2', '\x17', '\x2', '\x4', '\x6', '\b', '\n', '\f', '\xE', 
 		'\x10', '\x12', '\x14', '\x16', '\x18', '\x1A', '\x1C', '\x1E', ' ', '\"', 
-		'$', '&', '(', '\x2', '\b', '\x6', '\x2', '\b', '\b', '\n', '\n', '\f', 
-		'\f', '\x1B', '\x1B', '\x4', '\x2', '\a', '\a', '\x11', '\x11', '\x4', 
-		'\x2', '\a', '\a', '\x14', '\x14', '\x4', '\x2', '\a', '\a', '\x12', '\x12', 
-		'\x4', '\x2', '\a', '\a', '\x13', '\x13', '\x3', '\x2', '\x16', '\x18', 
-		'\x2', '\x92', '\x2', '+', '\x3', '\x2', '\x2', '\x2', '\x4', '\x37', 
-		'\x3', '\x2', '\x2', '\x2', '\x6', '\x39', '\x3', '\x2', '\x2', '\x2', 
-		'\b', '\x44', '\x3', '\x2', '\x2', '\x2', '\n', 'R', '\x3', '\x2', '\x2', 
-		'\x2', '\f', '`', '\x3', '\x2', '\x2', '\x2', '\xE', 'l', '\x3', '\x2', 
-		'\x2', '\x2', '\x10', 'o', '\x3', '\x2', '\x2', '\x2', '\x12', 'r', '\x3', 
-		'\x2', '\x2', '\x2', '\x14', 'u', '\x3', '\x2', '\x2', '\x2', '\x16', 
-		'x', '\x3', '\x2', '\x2', '\x2', '\x18', '{', '\x3', '\x2', '\x2', '\x2', 
-		'\x1A', '~', '\x3', '\x2', '\x2', '\x2', '\x1C', '\x80', '\x3', '\x2', 
-		'\x2', '\x2', '\x1E', '\x82', '\x3', '\x2', '\x2', '\x2', ' ', '\x84', 
-		'\x3', '\x2', '\x2', '\x2', '\"', '\x88', '\x3', '\x2', '\x2', '\x2', 
-		'$', '\x8D', '\x3', '\x2', '\x2', '\x2', '&', '\x90', '\x3', '\x2', '\x2', 
-		'\x2', '(', '\x94', '\x3', '\x2', '\x2', '\x2', '*', ',', '\x5', '\x4', 
-		'\x3', '\x2', '+', '*', '\x3', '\x2', '\x2', '\x2', ',', '-', '\x3', '\x2', 
-		'\x2', '\x2', '-', '+', '\x3', '\x2', '\x2', '\x2', '-', '.', '\x3', '\x2', 
-		'\x2', '\x2', '.', '/', '\x3', '\x2', '\x2', '\x2', '/', '\x30', '\a', 
-		'\x2', '\x2', '\x3', '\x30', '\x3', '\x3', '\x2', '\x2', '\x2', '\x31', 
-		'\x38', '\x5', '\b', '\x5', '\x2', '\x32', '\x38', '\x5', '\n', '\x6', 
-		'\x2', '\x33', '\x38', '\x5', '\x6', '\x4', '\x2', '\x34', '\x38', '\x5', 
-		'\x10', '\t', '\x2', '\x35', '\x38', '\x5', '\f', '\a', '\x2', '\x36', 
-		'\x38', '\x5', '\xE', '\b', '\x2', '\x37', '\x31', '\x3', '\x2', '\x2', 
-		'\x2', '\x37', '\x32', '\x3', '\x2', '\x2', '\x2', '\x37', '\x33', '\x3', 
-		'\x2', '\x2', '\x2', '\x37', '\x34', '\x3', '\x2', '\x2', '\x2', '\x37', 
-		'\x35', '\x3', '\x2', '\x2', '\x2', '\x37', '\x36', '\x3', '\x2', '\x2', 
-		'\x2', '\x38', '\x5', '\x3', '\x2', '\x2', '\x2', '\x39', ':', '\a', '\x1B', 
-		'\x2', '\x2', ':', ';', '\x5', '\x1A', '\xE', '\x2', ';', '?', '\x5', 
-		'\x18', '\r', '\x2', '<', '>', '\x5', '\x10', '\t', '\x2', '=', '<', '\x3', 
-		'\x2', '\x2', '\x2', '>', '\x41', '\x3', '\x2', '\x2', '\x2', '?', '=', 
-		'\x3', '\x2', '\x2', '\x2', '?', '@', '\x3', '\x2', '\x2', '\x2', '@', 
-		'\x42', '\x3', '\x2', '\x2', '\x2', '\x41', '?', '\x3', '\x2', '\x2', 
-		'\x2', '\x42', '\x43', '\x5', '(', '\x15', '\x2', '\x43', '\a', '\x3', 
-		'\x2', '\x2', '\x2', '\x44', '\x45', '\a', '\b', '\x2', '\x2', '\x45', 
-		'\x46', '\x5', '\x1E', '\x10', '\x2', '\x46', 'H', '\x5', '\x12', '\n', 
-		'\x2', 'G', 'I', '\x5', '\x14', '\v', '\x2', 'H', 'G', '\x3', '\x2', '\x2', 
-		'\x2', 'H', 'I', '\x3', '\x2', '\x2', '\x2', 'I', 'M', '\x3', '\x2', '\x2', 
-		'\x2', 'J', 'L', '\x5', '\x16', '\f', '\x2', 'K', 'J', '\x3', '\x2', '\x2', 
-		'\x2', 'L', 'O', '\x3', '\x2', '\x2', '\x2', 'M', 'K', '\x3', '\x2', '\x2', 
-		'\x2', 'M', 'N', '\x3', '\x2', '\x2', '\x2', 'N', 'P', '\x3', '\x2', '\x2', 
-		'\x2', 'O', 'M', '\x3', '\x2', '\x2', '\x2', 'P', 'Q', '\x5', '(', '\x15', 
-		'\x2', 'Q', '\t', '\x3', '\x2', '\x2', '\x2', 'R', 'S', '\a', '\n', '\x2', 
-		'\x2', 'S', 'T', '\x5', '\x1E', '\x10', '\x2', 'T', 'V', '\x5', '\x12', 
-		'\n', '\x2', 'U', 'W', '\x5', '\x14', '\v', '\x2', 'V', 'U', '\x3', '\x2', 
-		'\x2', '\x2', 'V', 'W', '\x3', '\x2', '\x2', '\x2', 'W', '[', '\x3', '\x2', 
-		'\x2', '\x2', 'X', 'Z', '\x5', '\x16', '\f', '\x2', 'Y', 'X', '\x3', '\x2', 
-		'\x2', '\x2', 'Z', ']', '\x3', '\x2', '\x2', '\x2', '[', 'Y', '\x3', '\x2', 
-		'\x2', '\x2', '[', '\\', '\x3', '\x2', '\x2', '\x2', '\\', '^', '\x3', 
-		'\x2', '\x2', '\x2', ']', '[', '\x3', '\x2', '\x2', '\x2', '^', '_', '\x5', 
-		'(', '\x15', '\x2', '_', '\v', '\x3', '\x2', '\x2', '\x2', '`', '\x62', 
-		'\a', '\x1D', '\x2', '\x2', '\x61', '\x63', '\t', '\x2', '\x2', '\x2', 
-		'\x62', '\x61', '\x3', '\x2', '\x2', '\x2', '\x63', '\x64', '\x3', '\x2', 
-		'\x2', '\x2', '\x64', '\x62', '\x3', '\x2', '\x2', '\x2', '\x64', '\x65', 
-		'\x3', '\x2', '\x2', '\x2', '\x65', 'i', '\x3', '\x2', '\x2', '\x2', '\x66', 
-		'h', '\x5', '(', '\x15', '\x2', 'g', '\x66', '\x3', '\x2', '\x2', '\x2', 
-		'h', 'k', '\x3', '\x2', '\x2', '\x2', 'i', 'g', '\x3', '\x2', '\x2', '\x2', 
-		'i', 'j', '\x3', '\x2', '\x2', '\x2', 'j', '\r', '\x3', '\x2', '\x2', 
-		'\x2', 'k', 'i', '\x3', '\x2', '\x2', '\x2', 'l', 'm', '\a', '\x1E', '\x2', 
-		'\x2', 'm', 'n', '\a', '\x6', '\x2', '\x2', 'n', '\xF', '\x3', '\x2', 
-		'\x2', '\x2', 'o', 'p', '\a', '\f', '\x2', '\x2', 'p', 'q', '\x5', '\"', 
-		'\x12', '\x2', 'q', '\x11', '\x3', '\x2', '\x2', '\x2', 'r', 's', '\a', 
-		'\r', '\x2', '\x2', 's', 't', '\x5', '\"', '\x12', '\x2', 't', '\x13', 
-		'\x3', '\x2', '\x2', '\x2', 'u', 'v', '\a', '\xE', '\x2', '\x2', 'v', 
-		'w', '\x5', '\"', '\x12', '\x2', 'w', '\x15', '\x3', '\x2', '\x2', '\x2', 
-		'x', 'y', '\a', '\x15', '\x2', '\x2', 'y', 'z', '\x5', '\"', '\x12', '\x2', 
-		'z', '\x17', '\x3', '\x2', '\x2', '\x2', '{', '|', '\a', '\x1C', '\x2', 
-		'\x2', '|', '}', '\x5', ' ', '\x11', '\x2', '}', '\x19', '\x3', '\x2', 
-		'\x2', '\x2', '~', '\x7F', '\t', '\x3', '\x2', '\x2', '\x7F', '\x1B', 
-		'\x3', '\x2', '\x2', '\x2', '\x80', '\x81', '\t', '\x4', '\x2', '\x2', 
-		'\x81', '\x1D', '\x3', '\x2', '\x2', '\x2', '\x82', '\x83', '\t', '\x5', 
-		'\x2', '\x2', '\x83', '\x1F', '\x3', '\x2', '\x2', '\x2', '\x84', '\x85', 
-		'\t', '\x6', '\x2', '\x2', '\x85', '!', '\x3', '\x2', '\x2', '\x2', '\x86', 
-		'\x89', '\a', '\a', '\x2', '\x2', '\x87', '\x89', '\x5', '$', '\x13', 
-		'\x2', '\x88', '\x86', '\x3', '\x2', '\x2', '\x2', '\x88', '\x87', '\x3', 
-		'\x2', '\x2', '\x2', '\x89', '#', '\x3', '\x2', '\x2', '\x2', '\x8A', 
-		'\x8E', '\a', '\x10', '\x2', '\x2', '\x8B', '\x8C', '\a', '\xF', '\x2', 
-		'\x2', '\x8C', '\x8E', '\x5', '&', '\x14', '\x2', '\x8D', '\x8A', '\x3', 
-		'\x2', '\x2', '\x2', '\x8D', '\x8B', '\x3', '\x2', '\x2', '\x2', '\x8E', 
-		'%', '\x3', '\x2', '\x2', '\x2', '\x8F', '\x91', '\t', '\a', '\x2', '\x2', 
-		'\x90', '\x8F', '\x3', '\x2', '\x2', '\x2', '\x91', '\x92', '\x3', '\x2', 
-		'\x2', '\x2', '\x92', '\x90', '\x3', '\x2', '\x2', '\x2', '\x92', '\x93', 
-		'\x3', '\x2', '\x2', '\x2', '\x93', '\'', '\x3', '\x2', '\x2', '\x2', 
-		'\x94', '\x95', '\a', '\t', '\x2', '\x2', '\x95', ')', '\x3', '\x2', '\x2', 
-		'\x2', '\xE', '-', '\x37', '?', 'H', 'M', 'V', '[', '\x64', 'i', '\x88', 
-		'\x8D', '\x92',
+		'$', '&', '(', '*', '\x2', '\x5', '\x6', '\x2', '\b', '\b', '\n', '\n', 
+		'\f', '\f', '\x1C', '\x1C', '\x4', '\x2', '\a', '\a', '\x12', '\x12', 
+		'\x4', '\x2', '\a', '\a', '\x17', '\x19', '\x2', '\xB2', '\x2', '-', '\x3', 
+		'\x2', '\x2', '\x2', '\x4', '\x39', '\x3', '\x2', '\x2', '\x2', '\x6', 
+		';', '\x3', '\x2', '\x2', '\x2', '\b', '\x46', '\x3', '\x2', '\x2', '\x2', 
+		'\n', 'W', '\x3', '\x2', '\x2', '\x2', '\f', 'h', '\x3', '\x2', '\x2', 
+		'\x2', '\xE', 't', '\x3', '\x2', '\x2', '\x2', '\x10', 'w', '\x3', '\x2', 
+		'\x2', '\x2', '\x12', 'z', '\x3', '\x2', '\x2', '\x2', '\x14', '}', '\x3', 
+		'\x2', '\x2', '\x2', '\x16', '\x80', '\x3', '\x2', '\x2', '\x2', '\x18', 
+		'\x83', '\x3', '\x2', '\x2', '\x2', '\x1A', '\x86', '\x3', '\x2', '\x2', 
+		'\x2', '\x1C', '\x8E', '\x3', '\x2', '\x2', '\x2', '\x1E', '\x95', '\x3', 
+		'\x2', '\x2', '\x2', ' ', '\x97', '\x3', '\x2', '\x2', '\x2', '\"', '\xA1', 
+		'\x3', '\x2', '\x2', '\x2', '$', '\xA3', '\x3', '\x2', '\x2', '\x2', '&', 
+		'\xA6', '\x3', '\x2', '\x2', '\x2', '(', '\xAA', '\x3', '\x2', '\x2', 
+		'\x2', '*', '\xAC', '\x3', '\x2', '\x2', '\x2', ',', '.', '\x5', '\x4', 
+		'\x3', '\x2', '-', ',', '\x3', '\x2', '\x2', '\x2', '.', '/', '\x3', '\x2', 
+		'\x2', '\x2', '/', '-', '\x3', '\x2', '\x2', '\x2', '/', '\x30', '\x3', 
+		'\x2', '\x2', '\x2', '\x30', '\x31', '\x3', '\x2', '\x2', '\x2', '\x31', 
+		'\x32', '\a', '\x2', '\x2', '\x3', '\x32', '\x3', '\x3', '\x2', '\x2', 
+		'\x2', '\x33', ':', '\x5', '\b', '\x5', '\x2', '\x34', ':', '\x5', '\n', 
+		'\x6', '\x2', '\x35', ':', '\x5', '\x6', '\x4', '\x2', '\x36', ':', '\x5', 
+		'\x10', '\t', '\x2', '\x37', ':', '\x5', '\f', '\a', '\x2', '\x38', ':', 
+		'\x5', '\xE', '\b', '\x2', '\x39', '\x33', '\x3', '\x2', '\x2', '\x2', 
+		'\x39', '\x34', '\x3', '\x2', '\x2', '\x2', '\x39', '\x35', '\x3', '\x2', 
+		'\x2', '\x2', '\x39', '\x36', '\x3', '\x2', '\x2', '\x2', '\x39', '\x37', 
+		'\x3', '\x2', '\x2', '\x2', '\x39', '\x38', '\x3', '\x2', '\x2', '\x2', 
+		':', '\x5', '\x3', '\x2', '\x2', '\x2', ';', '<', '\a', '\x1C', '\x2', 
+		'\x2', '<', '=', '\x5', '\x1C', '\xF', '\x2', '=', '\x41', '\x5', '\x18', 
+		'\r', '\x2', '>', '@', '\x5', '\x10', '\t', '\x2', '?', '>', '\x3', '\x2', 
+		'\x2', '\x2', '@', '\x43', '\x3', '\x2', '\x2', '\x2', '\x41', '?', '\x3', 
+		'\x2', '\x2', '\x2', '\x41', '\x42', '\x3', '\x2', '\x2', '\x2', '\x42', 
+		'\x44', '\x3', '\x2', '\x2', '\x2', '\x43', '\x41', '\x3', '\x2', '\x2', 
+		'\x2', '\x44', '\x45', '\x5', '*', '\x16', '\x2', '\x45', '\a', '\x3', 
+		'\x2', '\x2', '\x2', '\x46', 'G', '\a', '\b', '\x2', '\x2', 'G', 'H', 
+		'\x5', '\x1A', '\xE', '\x2', 'H', 'J', '\x5', '\x12', '\n', '\x2', 'I', 
+		'K', '\x5', '\x14', '\v', '\x2', 'J', 'I', '\x3', '\x2', '\x2', '\x2', 
+		'J', 'K', '\x3', '\x2', '\x2', '\x2', 'K', 'O', '\x3', '\x2', '\x2', '\x2', 
+		'L', 'N', '\x5', '\x16', '\f', '\x2', 'M', 'L', '\x3', '\x2', '\x2', '\x2', 
+		'N', 'Q', '\x3', '\x2', '\x2', '\x2', 'O', 'M', '\x3', '\x2', '\x2', '\x2', 
+		'O', 'P', '\x3', '\x2', '\x2', '\x2', 'P', 'S', '\x3', '\x2', '\x2', '\x2', 
+		'Q', 'O', '\x3', '\x2', '\x2', '\x2', 'R', 'T', '\x5', ' ', '\x11', '\x2', 
+		'S', 'R', '\x3', '\x2', '\x2', '\x2', 'S', 'T', '\x3', '\x2', '\x2', '\x2', 
+		'T', 'U', '\x3', '\x2', '\x2', '\x2', 'U', 'V', '\x5', '*', '\x16', '\x2', 
+		'V', '\t', '\x3', '\x2', '\x2', '\x2', 'W', 'X', '\a', '\n', '\x2', '\x2', 
+		'X', 'Y', '\x5', '\x1A', '\xE', '\x2', 'Y', '[', '\x5', '\x12', '\n', 
+		'\x2', 'Z', '\\', '\x5', '\x14', '\v', '\x2', '[', 'Z', '\x3', '\x2', 
+		'\x2', '\x2', '[', '\\', '\x3', '\x2', '\x2', '\x2', '\\', '`', '\x3', 
+		'\x2', '\x2', '\x2', ']', '_', '\x5', '\x16', '\f', '\x2', '^', ']', '\x3', 
+		'\x2', '\x2', '\x2', '_', '\x62', '\x3', '\x2', '\x2', '\x2', '`', '^', 
+		'\x3', '\x2', '\x2', '\x2', '`', '\x61', '\x3', '\x2', '\x2', '\x2', '\x61', 
+		'\x64', '\x3', '\x2', '\x2', '\x2', '\x62', '`', '\x3', '\x2', '\x2', 
+		'\x2', '\x63', '\x65', '\x5', ' ', '\x11', '\x2', '\x64', '\x63', '\x3', 
+		'\x2', '\x2', '\x2', '\x64', '\x65', '\x3', '\x2', '\x2', '\x2', '\x65', 
+		'\x66', '\x3', '\x2', '\x2', '\x2', '\x66', 'g', '\x5', '*', '\x16', '\x2', 
+		'g', '\v', '\x3', '\x2', '\x2', '\x2', 'h', 'j', '\a', '\x1E', '\x2', 
+		'\x2', 'i', 'k', '\t', '\x2', '\x2', '\x2', 'j', 'i', '\x3', '\x2', '\x2', 
+		'\x2', 'k', 'l', '\x3', '\x2', '\x2', '\x2', 'l', 'j', '\x3', '\x2', '\x2', 
+		'\x2', 'l', 'm', '\x3', '\x2', '\x2', '\x2', 'm', 'q', '\x3', '\x2', '\x2', 
+		'\x2', 'n', 'p', '\x5', '*', '\x16', '\x2', 'o', 'n', '\x3', '\x2', '\x2', 
+		'\x2', 'p', 's', '\x3', '\x2', '\x2', '\x2', 'q', 'o', '\x3', '\x2', '\x2', 
+		'\x2', 'q', 'r', '\x3', '\x2', '\x2', '\x2', 'r', '\r', '\x3', '\x2', 
+		'\x2', '\x2', 's', 'q', '\x3', '\x2', '\x2', '\x2', 't', 'u', '\a', '\x1F', 
+		'\x2', '\x2', 'u', 'v', '\a', '\x6', '\x2', '\x2', 'v', '\xF', '\x3', 
+		'\x2', '\x2', '\x2', 'w', 'x', '\a', '\f', '\x2', '\x2', 'x', 'y', '\x5', 
+		'\x1C', '\xF', '\x2', 'y', '\x11', '\x3', '\x2', '\x2', '\x2', 'z', '{', 
+		'\a', '\r', '\x2', '\x2', '{', '|', '\x5', '\x1C', '\xF', '\x2', '|', 
+		'\x13', '\x3', '\x2', '\x2', '\x2', '}', '~', '\a', '\xE', '\x2', '\x2', 
+		'~', '\x7F', '\x5', '\x1C', '\xF', '\x2', '\x7F', '\x15', '\x3', '\x2', 
+		'\x2', '\x2', '\x80', '\x81', '\a', '\x16', '\x2', '\x2', '\x81', '\x82', 
+		'\x5', '\x1C', '\xF', '\x2', '\x82', '\x17', '\x3', '\x2', '\x2', '\x2', 
+		'\x83', '\x84', '\a', '\x1D', '\x2', '\x2', '\x84', '\x85', '\x5', '\x1C', 
+		'\xF', '\x2', '\x85', '\x19', '\x3', '\x2', '\x2', '\x2', '\x86', '\x87', 
+		'\t', '\x3', '\x2', '\x2', '\x87', '\x1B', '\x3', '\x2', '\x2', '\x2', 
+		'\x88', '\x8F', '\a', '\a', '\x2', '\x2', '\x89', '\x8F', '\a', '\x11', 
+		'\x2', '\x2', '\x8A', '\x8F', '\a', '\x12', '\x2', '\x2', '\x8B', '\x8F', 
+		'\a', '\x14', '\x2', '\x2', '\x8C', '\x8F', '\a', '\x13', '\x2', '\x2', 
+		'\x8D', '\x8F', '\x5', '\x1E', '\x10', '\x2', '\x8E', '\x88', '\x3', '\x2', 
+		'\x2', '\x2', '\x8E', '\x89', '\x3', '\x2', '\x2', '\x2', '\x8E', '\x8A', 
+		'\x3', '\x2', '\x2', '\x2', '\x8E', '\x8B', '\x3', '\x2', '\x2', '\x2', 
+		'\x8E', '\x8C', '\x3', '\x2', '\x2', '\x2', '\x8E', '\x8D', '\x3', '\x2', 
+		'\x2', '\x2', '\x8F', '\x1D', '\x3', '\x2', '\x2', '\x2', '\x90', '\x96', 
+		'\a', '\x10', '\x2', '\x2', '\x91', '\x92', '\a', '\xF', '\x2', '\x2', 
+		'\x92', '\x96', '\x5', '&', '\x14', '\x2', '\x93', '\x94', '\a', '\xF', 
+		'\x2', '\x2', '\x94', '\x96', '\x5', '$', '\x13', '\x2', '\x95', '\x90', 
+		'\x3', '\x2', '\x2', '\x2', '\x95', '\x91', '\x3', '\x2', '\x2', '\x2', 
+		'\x95', '\x93', '\x3', '\x2', '\x2', '\x2', '\x96', '\x1F', '\x3', '\x2', 
+		'\x2', '\x2', '\x97', '\x99', '\a', ' ', '\x2', '\x2', '\x98', '\x9A', 
+		'\x5', '\"', '\x12', '\x2', '\x99', '\x98', '\x3', '\x2', '\x2', '\x2', 
+		'\x9A', '\x9B', '\x3', '\x2', '\x2', '\x2', '\x9B', '\x99', '\x3', '\x2', 
+		'\x2', '\x2', '\x9B', '\x9C', '\x3', '\x2', '\x2', '\x2', '\x9C', '!', 
+		'\x3', '\x2', '\x2', '\x2', '\x9D', '\x9E', '\x5', '$', '\x13', '\x2', 
+		'\x9E', '\x9F', '\a', '\a', '\x2', '\x2', '\x9F', '\xA2', '\x3', '\x2', 
+		'\x2', '\x2', '\xA0', '\xA2', '\a', '\x15', '\x2', '\x2', '\xA1', '\x9D', 
+		'\x3', '\x2', '\x2', '\x2', '\xA1', '\xA0', '\x3', '\x2', '\x2', '\x2', 
+		'\xA2', '#', '\x3', '\x2', '\x2', '\x2', '\xA3', '\xA4', '\a', '\x4', 
+		'\x2', '\x2', '\xA4', '%', '\x3', '\x2', '\x2', '\x2', '\xA5', '\xA7', 
+		'\x5', '(', '\x15', '\x2', '\xA6', '\xA5', '\x3', '\x2', '\x2', '\x2', 
+		'\xA7', '\xA8', '\x3', '\x2', '\x2', '\x2', '\xA8', '\xA6', '\x3', '\x2', 
+		'\x2', '\x2', '\xA8', '\xA9', '\x3', '\x2', '\x2', '\x2', '\xA9', '\'', 
+		'\x3', '\x2', '\x2', '\x2', '\xAA', '\xAB', '\t', '\x4', '\x2', '\x2', 
+		'\xAB', ')', '\x3', '\x2', '\x2', '\x2', '\xAC', '\xAD', '\a', '\t', '\x2', 
+		'\x2', '\xAD', '+', '\x3', '\x2', '\x2', '\x2', '\x12', '/', '\x39', '\x41', 
+		'J', 'O', 'S', '[', '`', '\x64', 'l', 'q', '\x8E', '\x95', '\x9B', '\xA1', 
+		'\xA8',
 	};
 
 	public static readonly ATN _ATN =

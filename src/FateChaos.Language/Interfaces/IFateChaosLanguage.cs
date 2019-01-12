@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace FateChaos.Language.Services {
+namespace FateChaos.Language.Interfaces {
   public interface IFateChaosLanguage {
     FateChaosParser GetParser(string input);
     FateChaosParser GetParser(TextReader reader);

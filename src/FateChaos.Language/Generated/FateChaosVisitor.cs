@@ -140,29 +140,11 @@ public interface IFateChaosVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitLocation([NotNull] FateChaosParser.LocationContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="FateChaosParser.set"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitSet([NotNull] FateChaosParser.SetContext context);
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="FateChaosParser.description"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitDescription([NotNull] FateChaosParser.DescriptionContext context);
-	/// <summary>
 	/// Visit a parse tree produced by <see cref="FateChaosParser.name"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitName([NotNull] FateChaosParser.NameContext context);
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="FateChaosParser.place"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitPlace([NotNull] FateChaosParser.PlaceContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="FateChaosParser.element"/>.
 	/// </summary>
@@ -170,25 +152,41 @@ public interface IFateChaosVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitElement([NotNull] FateChaosParser.ElementContext context);
 	/// <summary>
-	/// Visit a parse tree produced by the <c>randomFree</c>
-	/// labeled alternative in <see cref="FateChaosParser.random"/>.
+	/// Visit a parse tree produced by <see cref="FateChaosParser.random"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitRandomFree([NotNull] FateChaosParser.RandomFreeContext context);
+	Result VisitRandom([NotNull] FateChaosParser.RandomContext context);
 	/// <summary>
-	/// Visit a parse tree produced by the <c>randomPhrase</c>
-	/// labeled alternative in <see cref="FateChaosParser.random"/>.
+	/// Visit a parse tree produced by <see cref="FateChaosParser.skills"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitRandomPhrase([NotNull] FateChaosParser.RandomPhraseContext context);
+	Result VisitSkills([NotNull] FateChaosParser.SkillsContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="FateChaosParser.skill"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitSkill([NotNull] FateChaosParser.SkillContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="FateChaosParser.number"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitNumber([NotNull] FateChaosParser.NumberContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="FateChaosParser.phrase"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitPhrase([NotNull] FateChaosParser.PhraseContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="FateChaosParser.pos"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitPos([NotNull] FateChaosParser.PosContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="FateChaosParser.end"/>.
 	/// </summary>

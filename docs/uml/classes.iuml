@@ -26,8 +26,9 @@
         class Attribute {
         }
 
-        class Location {
+        class General {
         }
+
 
         Scene --> Card
         Npc --> Card
@@ -37,7 +38,7 @@
         HighConcept --> Aspect
         Trouble --> Aspect
         Attribute --> Aspect
-        
+        General --> Aspect
 
     }
 @enduml

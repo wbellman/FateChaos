@@ -4,7 +4,7 @@ grammar FateChaos;
  *  Parser Rules
  */
 
- test           : item+ EOF;
+ game           : item+ EOF;
 
  item           : character    #playerCharacterDef
                 | npc          #nonPlayerCharacterDef
@@ -14,23 +14,25 @@ grammar FateChaos;
                 | roll         #rollDice
                 ;
 
- scene          : SCENE set 
+ scene          : SCENE element
                     location
                     aspect*
                   end
                 ;
 
- character      : CHARACTER name 
+ character      : CHARACTER name
                     high_concept 
                     trouble? 
-                    attribute* 
+                    attribute*
+                    skills?
                   end
                 ;
 
- npc            : NPC TEXT 
+ npc            : NPC name
                     high_concept 
                     trouble? 
                     attribute* 
+                    skills?
                   end
                 ;
 
@@ -44,20 +46,24 @@ grammar FateChaos;
  high_concept   : HIGHCONCEPT element ;
  trouble        : TROUBLE element ;
  attribute      : ATTRIBUTE element ;
- location       : LOCATION place ;
+ location       : LOCATION element ;
 
- set            : ( TEXT | RANDOMSET ) ;
- description    : ( TEXT | RANDOMDESCRIPTION ) ;
  name           : ( TEXT | RANDOMNAME ) ;
- place          : ( TEXT | RANDOMPLACE ) ;
+ element        : ( TEXT | RANDOMSET | RANDOMNAME | RANDOMDESCRIPTION | RANDOMPLACE | random ) ;
 
- element        : ( TEXT | random ) ;
-
- random         : RANDOMANY       #randomFree
-                | RANDOM phrase   #randomPhrase
+ random         : RANDOMANY
+                | RANDOM phrase
+                | RANDOM number
                 ;
 
- phrase         : ( NOUN | ADJECTIVE | VERB )+ ;
+ skills         : SKILLS skill+;
+
+ skill          : ( number TEXT | RANDOMSKILL );
+
+ number         : INT ;
+
+ phrase         : pos+ ;
+ pos            : ( TEXT | NOUN | ADJECTIVE | VERB ) ;
 
  end            : END;
 
@@ -166,7 +172,12 @@ RANDOMPLACE                 : R A N D O M P L A C E
 RANDOMDESCRIPTION           : R A N D O M D E S C R I P T I O N
                             | R N D D 
                             ;
-ATTRIBUTE                   : A T T R I B U T E 
+
+RANDOMSKILL                 : R A N D O M S K I L L
+                            | R N D K
+                            ;
+
+ATTRIBUTE                   : A T T R I B U T E
                             | A R
                             ;
 
@@ -202,9 +213,13 @@ GENERATE                    : G E N E R A T E
                             | G E N
                             ;
 
-ROLL                        : R O L L 
-                            | R L 
-                            ;                            
+ROLL                        : R O L L
+                            | R L
+                            ;
+
+SKILLS                      : S K I L L S
+                            | S K L
+                            ;
 
 // Catch all
 WS                          : [ \t\r\n] -> skip ;

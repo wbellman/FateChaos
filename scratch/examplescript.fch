@@ -1,0 +1,49 @@
+Character "Steve Rogers"
+  HighConcept "Ultimate soldier, with heart"
+  Trouble     "Can't compromise my principals"
+  Attribute   "Physics defying shield" 
+  Attribute   "True blue" 
+  Attribute   "Stands up for freedom" 
+End
+
+Character "Tony Stark"
+  HighConcept "Genius, Billionaire, Philanthropist"
+  Trouble     "Smarter than everyone else"
+  Attribute   "I am iron man" 
+End
+
+Npc "Super Dave"
+  hc rnda
+  tr rnda
+End
+
+Npc "Big Bad Roy"
+  hc rnda
+  tr rnda
+  ar rnda
+End
+
+Scene "The big shootout"
+  Location  "Washington D.C."
+  Aspect    "Town in uproar"
+  Aspect    "Searching for Cap"
+End
+
+Scene RandomSet
+  Location  RandomPlace
+  Aspect    rnda 
+  Aspect    rnda 
+  Aspect    rnda 
+End
+
+Aspect "Up for grabs"
+
+Aspect RandomAny
+
+Roll 1D20
+
+rl +d10
+
+Generate Scene
+
+Gen Pc Npc Npc Npc Scene end
